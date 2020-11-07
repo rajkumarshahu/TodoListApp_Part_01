@@ -9,7 +9,13 @@
 import UIKit
 
 class TodoDetailViewController: UIViewController {
-
+    
+    var todoTableViewController : TodoListTableViewController? = nil
+    
+    var todoItem: String = ""
+    var date: String = ""
+    var detail: String = ""
+    
     @IBOutlet weak var todoTitleLabel: UILabel!
     
     @IBOutlet weak var todoNameTextView: UITextField!
@@ -19,9 +25,9 @@ class TodoDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        todoTitleLabel.text = todoLists[cellIndex].todoItem + "'s Details"
-        todoNameTextView.text = todoLists[cellIndex].todoItem
-        todoDetailTextView.text = todoLists[cellIndex].detail
+        todoTitleLabel?.text = todoItem + "'s Detail"
+        todoNameTextView?.text = todoItem
+        todoDetailTextView?.text = detail
         
     }
     

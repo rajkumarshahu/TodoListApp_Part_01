@@ -23,6 +23,18 @@ class AddTodoViewController: UIViewController {
 
     
     @IBAction func addTodoTapped(_ sender: Any) {
+        let today = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE MMM d, yyyy"
+        let newToDo = Todo()
+               if let todoItem =  todoNameTextField.text {
+                   newToDo.todoItem = todoItem
+                    newToDo.date = formatter.string(from: today)
+                   todoTableViewController?.todos.append(newToDo)
+                   todoTableViewController?.tableView.reloadData()
+                   navigationController?.popViewController(animated: true)
+               }
+       
         
         print("Tapped!!!")
     }
