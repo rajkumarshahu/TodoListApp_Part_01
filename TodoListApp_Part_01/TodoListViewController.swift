@@ -8,12 +8,23 @@
 
 import UIKit
 
-
-
 struct Todo {
     let todoItem : String
     let date : String
+    let detail: String
 }
+
+var todoLists = [
+    Todo(todoItem: "Web Tech M3", date: "Wednesday November 11, 2020", detail: "Integration of at least half of the screens (use cases) with the web service."),
+    Todo(todoItem: "Enterprise Tech M3", date: "Thursday November 12, 2020", detail: "Web Server with Implementation of all of use-cases. Integration with Mobile App (at least one use case – e.g. List All. Demonstration of functionality (e.g. using Postman)"),
+    Todo(todoItem: "iOS Todo List App", date: "Friday November 13, 2020", detail: "The app interface will allow the user to enter a list of Todos (or tasks) on the main screen. Include a second screen that displays the Todo Details."),
+    Todo(todoItem: "Android google map", date: "Sunday November 8, 2020", detail: "Develop an Android app that allows customers to find the location and address of the pizza restaurants. "),
+    Todo(todoItem: "UI/UX Milestone 3", date: "Friday November 13, 2020",  detail: "Create a usability testing plan for your proposed design. Run user testing sessions and summarize your findings")
+]
+
+var cellIndex = 0
+
+
 
 class TodoTableViewCell: UITableViewCell {
     
@@ -29,13 +40,7 @@ class TodoTableViewCell: UITableViewCell {
 class TodoListTableViewController: UITableViewController {
     
     
-    let todoLists = [
-        Todo(todoItem: "Web Tech M3", date: "Wednesday November 11, 2020"),
-        Todo(todoItem: "Enterprise Tech M3", date: "Thursday November 12, 2020"),
-        Todo(todoItem: "iOS Todo List App", date: "Friday November 13, 2020"),
-        Todo(todoItem: "Android google map", date: "Sunday November 8, 2020"),
-        Todo(todoItem: "UI/UX Milestone 3", date: "Friday November 13, 2020")
-    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,9 +66,23 @@ class TodoListTableViewController: UITableViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let addViewController = segue.destination as? AddTodoViewController {
+            addViewController.todoTableViewController = self
+        }
+    }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        cellIndex = indexPath.row
+        
+        performSegue(withIdentifier: "TodoDetail", sender: self)
+    }
     
 }
+
+
+
+
 
 extension String {
     func strikeThrough() -> NSAttributedString {
